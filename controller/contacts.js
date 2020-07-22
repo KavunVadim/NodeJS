@@ -45,7 +45,7 @@ exports.removeContact = async (req, res) => {
   try {
     const { contactId } = req.params;
 
-    const contact = await ContactModel.deleteById({ _id: contactId });
+    const contact = await ContactModel.findByIdAndDelete({ _id: contactId });
 
     res.send({ message: 'contact deleted' });
   } catch (error) {
