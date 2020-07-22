@@ -1,43 +1,28 @@
-const morgan = require('morgan');
-const cors = require('cors');
 const express = require('express');
 const app = express();
 
-const {
-  listContacts,
-  getById,
-  addContact,
-  removeContact,
-  updateContact,
-} = require('./contacts.js');
+const morgan = require('morgan');
+const cors = require('cors');
 
-//--PORT--//
+const database = require('./db/database');
+const contacts = require('./routes/contacts');
 
-const PORT = 3005;
+async function main() {
+  await database.init();
 
-//--------------use-----------//
+  app.use(express.json());
+  app.use(cors());
+  app.use(morgan('combined'));
+  app.use(contacts);
 
-app.use(express.json());
-app.use(morgan('combined'));
-app.use(
-  cors({
-    origin: `http://localhost:${PORT}`,
-  }),
-);
+  app.use((req, res) => {
+    res.status(404).send({ message: 'Page not found' });
+  });
 
-//--------------get, post, delete, patch-----------//
+  app.listen(3006, err => {
+    err && console.error('error', err);
+    console.info('Operation complete');
+  });
+}
 
-app.get('/contacts', listContacts);
-
-app.get('/contacts/:contactId', getById);
-
-app.post('/contacts', addContact);
-
-app.delete('/contacts/:contactId', removeContact);
-
-app.patch('/contacts/:contactId', updateContact);
-
-app.listen(PORT, err => {
-  err && console.error('error', err);
-  console.info('Operation complete');
-});
+main().catch(console.error);
