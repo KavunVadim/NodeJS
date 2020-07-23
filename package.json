@@ -10,17 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Diz1111Diz/NodeJS.git"
+    "url": "git+https://github.com/KavunVadim/NodeJS.git"
   },
   "author": "diz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Diz1111Diz/NodeJS/issues"
+    "url": "https://github.com/KavunVadim/NodeJS/issues"
   },
-  "homepage": "https://github.com/Diz1111Diz/NodeJS#readme",
+  "homepage": "https://github.com/KavunVadim/NodeJS#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "yargs": "^15.3.1",
-    "express": "^4.17.1"
+    "yargs": "^15.3.1"
   }
 }
